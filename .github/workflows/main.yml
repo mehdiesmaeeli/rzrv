@@ -1,0 +1,21 @@
+name: Setup MVC Project
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      - name: Create MVC Project
+        run: |
+          dotnet new mvc -n RZRV -f net6.0
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add .
+          git commit -m "Add .NET Core 6 MVC project structure"
+          git push
